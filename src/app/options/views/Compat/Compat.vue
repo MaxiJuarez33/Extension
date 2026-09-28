@@ -42,6 +42,13 @@
 			</template>
 
 			<!-- Ask for Permission -->
+			<template v-else-if="isSafari">
+				<div class="seventv-compat-permission-request">
+					<p>Safari does not allow extensions to inspect or disable other extensions.</p>
+					<UiButton v-if="internal" class="ui-button-hollow" @click="emit('skip')"> Continue </UiButton>
+				</div>
+			</template>
+
 			<template v-else>
 				<div class="seventv-compat-permission-request">
 					<UiButton class="ui-button-important" @click="requestManagement">
@@ -74,6 +81,7 @@ const compatList = reactive(new Map<ExtensionInfo, SevenTV.ConfigCompat>());
 
 const hasManagementPermission = ref(false);
 const isExtensionContext = inject(OPTIONS_CONTEXT_KEY, false);
+const isSafari = import.meta.env.VITE_APP_SAFARI === "true";
 const severityMap: Record<SevenTV.ConfigCompatIssueSeverity, string> = {
 	WARNING: "#ff5722",
 	CLASHING: "#f44336",
@@ -89,6 +97,8 @@ fetch(`${import.meta.env.VITE_APP_API}/config/${configName}`)
 	.then((r) => (config.value = r));
 
 function requestManagement(): void {
+	if (isSafari) return;
+
 	chrome.permissions.request(
 		{
 			permissions: ["management"],
@@ -131,7 +141,7 @@ function getColorBorder(compat: SevenTV.ConfigCompat): string {
 }
 
 // check current status of management permission
-if (isExtensionContext && chrome && chrome.permissions) {
+if (!isSafari && isExtensionContext && chrome && chrome.permissions) {
 	chrome.permissions.contains(
 		{
 			permissions: ["management"],

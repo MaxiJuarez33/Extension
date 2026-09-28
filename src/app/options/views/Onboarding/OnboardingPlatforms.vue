@@ -2,20 +2,25 @@
 	<main class="onboarding-platforms">
 		<div class="header">
 			<h1 v-t="'onboarding.platforms_title'" />
-			<p v-t="'onboarding.platforms_subtitle'" />
+			<p v-if="isSafari">7TV is enabled for Twitch, Kick and YouTube. Safari controls site access.</p>
+			<p v-else v-t="'onboarding.platforms_subtitle'" />
 		</div>
 		<div class="sites">
 			<div
 				v-for="platform of platforms"
 				:key="platform.name"
 				class="supported-site"
+				:class="{ fixed: isSafari }"
 				:selected="platform.selected"
 				@click="toggle(platform)"
 			>
 				<component :is="platform.icon as AnyInstanceType" />
 			</div>
 		</div>
-		<div v-t="'onboarding.platforms_mutable_note'" class="data" />
+		<div v-if="isSafari" class="data">
+			You can review or revoke access later in Safari Settings &gt; Extensions.
+		</div>
+		<div v-else v-t="'onboarding.platforms_mutable_note'" class="data" />
 	</main>
 </template>
 
@@ -28,9 +33,15 @@ interface PlatformDef {
 }
 
 const ctx = useOnboarding("platforms");
+const isSafari = import.meta.env.VITE_APP_SAFARI === "true";
 
 onActivated(() => {
 	ctx.setLock(true, () => {
+		if (isSafari) {
+			ctx.setLock(false);
+			return true;
+		}
+
 		const selection = platforms.value.filter((p) => p.selected);
 		if (selection.length === 0) return false;
 
@@ -54,6 +65,7 @@ const platforms = ref<PlatformDef[]>([
 ]);
 
 function toggle(p: PlatformDef) {
+	if (isSafari) return;
 	p.selected = !p.selected;
 }
 </script>
@@ -125,6 +137,10 @@ main.onboarding-platforms {
 				cursor: pointer;
 				user-select: none;
 				outline-color: var(--seventv-text-color-normal);
+			}
+
+			&.fixed:hover {
+				cursor: default;
 			}
 
 			&[selected="true"] {

@@ -58,6 +58,7 @@ const inject = () => {
 	bc.addEventListener("message", (ev) => {
 		switch (ev.data.type) {
 			case "seventv-create-permission-listener": {
+				if (import.meta.env.VITE_APP_SAFARI === "true") return;
 				const { selector, id, origins, permissions } = ev.data.data as PermissionRequestEvent;
 
 				const btn = document.querySelector<HTMLElement>(selector);

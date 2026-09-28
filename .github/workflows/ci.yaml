@@ -81,6 +81,9 @@ jobs:
       - name: Run Linter
         run: yarn lint
 
+      - name: Build Safari web extension
+        run: yarn build:safari
+
       - name: Build App
         env:
           BRANCH: ${{ (inputs.branch != 'stable' && 'nightly') || '' }}

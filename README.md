@@ -48,6 +48,26 @@
 
 ## Development
 
+### Safari
+
+The native Safari Web Extension wrapper uses the same Twitch, Kick and YouTube
+implementations as the other browser builds.
+
+End users should install a signed and notarized `7TV for Safari.app` release,
+open it once, then enable 7TV in Safari Settings > Extensions. They do not need
+Xcode, a terminal, or any development tools.
+
+This repository currently contains the source build target; it does not ship a
+notarized public binary. Maintainers building or preparing a release can use:
+
+```sh
+yarn build:safari
+./script/build-safari-local.sh
+```
+
+See [SAFARI.md](SAFARI.md) for user installation, maintainer builds, and public
+distribution requirements.
+
 ### Building
 
 -   make deps
