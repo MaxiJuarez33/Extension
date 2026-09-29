@@ -68,6 +68,17 @@ yarn build:safari
 See [SAFARI.md](SAFARI.md) for user installation, maintainer builds, and public
 distribution requirements.
 
+This fork also prepares an **unofficial, self-built Xcode package** for users
+who want Safari support before an official notarized release. It requires full
+[Xcode](https://apps.apple.com/app/xcode/id497799835) and a free Apple Account,
+but no Node.js, Yarn, Homebrew, or Git. See
+[safari-package/README.md](safari-package/README.md) for the manual, command,
+and AI-assisted installation paths. Generate the distributable ZIP with:
+
+```sh
+./script/package-safari-xcode.sh
+```
+
 ### Building
 
 -   make deps
