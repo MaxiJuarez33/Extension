@@ -8,6 +8,7 @@ repository_project_path="$package_dir/../safari-project/7TV for Safari/7TV for S
 xcode_developer_dir="/Applications/Xcode.app/Contents/Developer"
 install_dir="$HOME/Applications"
 install_path="$install_dir/7TV for Safari.app"
+backup_dir="$HOME/Library/Application Support/7TV for Safari/Backups"
 build_dir=$(mktemp -d "${TMPDIR%/}/seven-tv-safari-install.XXXXXX")
 built_app="$build_dir/Build/Products/Release/7TV for Safari.app"
 
@@ -37,6 +38,24 @@ fi
 
 DEVELOPER_DIR="$xcode_developer_dir" xcodebuild -version >/dev/null
 
+# Always build from a temporary copy so repository installation and ZIP
+# installation produce the same unofficial name without modifying their input.
+source_project_dir="${project_path:h}"
+temporary_project_dir="$build_dir/Project/7TV for Safari"
+/usr/bin/ditto "$source_project_dir" "$temporary_project_dir"
+project_path="$temporary_project_dir/7TV for Safari.xcodeproj"
+temporary_manifest="$temporary_project_dir/7TV for Safari Extension/Resources/manifest.json"
+temporary_pbxproj="$project_path/project.pbxproj"
+
+/usr/bin/plutil -replace name -string "7TV for Safari (Unofficial)" "$temporary_manifest"
+/usr/bin/plutil -replace description -string "Unofficial Safari build of the 7TV Web Extension." "$temporary_manifest"
+/usr/bin/sed -i '' \
+	's/INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari";/INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari (Unofficial)";/' \
+	"$temporary_pbxproj"
+/usr/bin/sed -i '' \
+	's/INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari Extension";/INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari (Unofficial)";/' \
+	"$temporary_pbxproj"
+
 identity_line=$(security find-identity -v -p codesigning | awk '/Apple Development/ {print; exit}')
 signing_identity=$(print -r -- "$identity_line" | awk '{print $2}')
 team_id=$(print -r -- "$identity_line" | sed -E 's/.*\(([A-Z0-9]+)\)".*/\1/')
@@ -59,16 +78,17 @@ DEVELOPER_DIR="$xcode_developer_dir" \
 	CODE_SIGN_STYLE=Manual \
 	CODE_SIGN_IDENTITY="$signing_identity" \
 	PROVISIONING_PROFILE_SPECIFIER= \
-	CODE_SIGN_INJECT_BASE_ENTITLEMENTS=NO \
 	REGISTER_WITH_LAUNCH_SERVICES=NO \
 	build
 
 codesign --verify --deep --strict "$built_app"
 "$package_dir/verify.command" "$built_app" --skip-registration
 
+/usr/bin/pkill -x "7TV for Safari" 2>/dev/null || true
 /bin/mkdir -p "$install_dir"
 if [[ -d "$install_path" ]]; then
-	backup_path="$install_dir/7TV for Safari.backup-$(date +%Y%m%d-%H%M%S).app"
+	/bin/mkdir -p "$backup_dir"
+	backup_path="$backup_dir/7TV for Safari-$(date +%Y%m%d-%H%M%S).app.backup"
 	/bin/mv "$install_path" "$backup_path"
 	print -r -- "Previous installation moved to: $backup_path"
 fi

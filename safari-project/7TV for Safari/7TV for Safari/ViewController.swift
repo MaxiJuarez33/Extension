@@ -29,7 +29,7 @@ class ViewController: NSViewController {
         iconView.imageScaling = .scaleProportionallyUpOrDown
         iconView.translatesAutoresizingMaskIntoConstraints = false
 
-        let titleLabel = NSTextField(labelWithString: "7TV for Safari")
+        let titleLabel = NSTextField(labelWithString: "7TV for Safari (Unofficial)")
         titleLabel.font = .systemFont(ofSize: 24, weight: .semibold)
         titleLabel.alignment = .center
 
@@ -87,11 +87,49 @@ class ViewController: NSViewController {
     }
 
     @objc private func openSafariSettings() {
-        SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
+        statusLabel.stringValue = "Opening Safari Settings…"
+
+        guard let safariURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.apple.Safari") else {
+            statusLabel.stringValue = "Safari could not be found. Open Safari > Settings > Extensions manually."
+            return
+        }
+
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.activates = true
+
+        NSWorkspace.shared.openApplication(at: safariURL, configuration: configuration) { _, launchError in
             DispatchQueue.main.async {
-                NSApplication.shared.terminate(nil)
+                guard launchError == nil else {
+                    self.statusLabel.stringValue = "Safari could not be opened. Open Safari > Settings > Extensions manually."
+                    return
+                }
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
+                        DispatchQueue.main.async {
+                            let appleEventError = error == nil ? nil : self.openSafariExtensionsUsingAppleEvent()
+                            if error == nil || appleEventError == nil {
+                                self.statusLabel.stringValue = "Safari Settings opened. Enable 7TV for Safari (Unofficial)."
+                            } else {
+                                self.statusLabel.stringValue = "Safari opened. Select Safari > Settings > Extensions manually."
+                            }
+                        }
+                    }
+                }
             }
         }
+    }
+
+    private func openSafariExtensionsUsingAppleEvent() -> NSDictionary? {
+        let scriptSource = """
+        tell application id "com.apple.Safari"
+            activate
+            show extensions preferences "\(extensionBundleIdentifier)"
+        end tell
+        """
+        var errorInfo: NSDictionary?
+        NSAppleScript(source: scriptSource)?.executeAndReturnError(&errorInfo)
+        return errorInfo
     }
 
 }

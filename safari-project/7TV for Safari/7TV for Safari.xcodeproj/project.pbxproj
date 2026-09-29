@@ -461,7 +461,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "7TV for Safari Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari (Unofficial)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -495,7 +495,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "7TV for Safari Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari Extension";
+				INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari (Unofficial)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -532,7 +532,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "7TV for Safari/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari";
+				INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari (Unofficial)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -572,7 +572,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "7TV for Safari/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari";
+				INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari (Unofficial)";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;

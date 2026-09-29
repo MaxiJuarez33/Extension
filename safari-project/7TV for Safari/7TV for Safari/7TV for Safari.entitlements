@@ -4,5 +4,14 @@
 <dict>
 	<key>com.apple.security.app-sandbox</key>
 	<true/>
+	<key>com.apple.security.automation.apple-events</key>
+	<true/>
+	<key>com.apple.security.scripting-targets</key>
+	<dict>
+		<key>com.apple.Safari</key>
+		<array>
+			<string>com.apple.Safari.show-extensions-preferences</string>
+		</array>
+	</dict>
 </dict>
 </plist>

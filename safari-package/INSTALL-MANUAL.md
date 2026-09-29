@@ -23,8 +23,10 @@
 
    ![Expected 7TV for Safari app](screenshots/04-ready.png)
 
-7. Open **Safari > Settings > Extensions**, enable **7TV for Safari
-   (Unofficial)**, and allow access to Twitch and Kick.
+7. Press **Open Safari Settings…**. Safari must open directly at
+   **Settings > Extensions**. Enable **7TV for Safari (Unofficial)** and allow
+   access to Twitch and Kick. If macOS asks whether the app may control Safari,
+   choose **Allow**; this permission is used only to open that Safari panel.
 
 Verification: open Twitch and Kick, confirm that 7TV emotes appear, reload each
 page, then quit and reopen Safari. If Xcode reports that a bundle identifier is
