@@ -4,6 +4,8 @@ First install [Xcode](https://apps.apple.com/app/xcode/id497799835), open it
 once, and add your Apple Account in **Xcode > Settings > Accounts**. Create an
 **Apple Development** certificate under **Manage Certificates** if necessary.
 
+## From the downloaded ZIP
+
 Open Terminal, type `cd ` with a trailing space, drag the extracted
 `7TV-for-Safari-Xcode` folder into Terminal, press Return, then run:
 
@@ -11,6 +13,20 @@ Open Terminal, type `cd ` with a trailing space, drag the extracted
 ./install.command
 ./verify.command
 ```
+
+## From the source repository
+
+Open Terminal in the repository root, then run:
+
+```sh
+cd safari-package
+./install.command
+./verify.command
+```
+
+The installer detects both layouts automatically. The repository path uses the
+Xcode project in `safari-project`; it does not require moving or copying it into
+`safari-package`.
 
 The installer builds with the first local Apple Development identity, keeps a
 timestamped backup of an existing installation, installs the app in

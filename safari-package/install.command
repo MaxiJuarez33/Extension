@@ -3,7 +3,8 @@
 set -euo pipefail
 
 package_dir="${0:A:h}"
-project_path="$package_dir/7TV for Safari/7TV for Safari.xcodeproj"
+packaged_project_path="$package_dir/7TV for Safari/7TV for Safari.xcodeproj"
+repository_project_path="$package_dir/../safari-project/7TV for Safari/7TV for Safari.xcodeproj"
 xcode_developer_dir="/Applications/Xcode.app/Contents/Developer"
 install_dir="$HOME/Applications"
 install_path="$install_dir/7TV for Safari.app"
@@ -22,8 +23,15 @@ if [[ ! -d "/Applications/Xcode.app" || ! -x "$xcode_developer_dir/usr/bin/xcode
 	exit 1
 fi
 
-if [[ ! -d "$project_path" ]]; then
-	print -u2 -- "The packaged Xcode project is missing. Download a fresh package."
+if [[ -d "$packaged_project_path" ]]; then
+	project_path="$packaged_project_path"
+	project_layout="downloaded package"
+elif [[ -d "$repository_project_path" ]]; then
+	project_path="${repository_project_path:A}"
+	project_layout="source repository"
+else
+	print -u2 -- "The 7TV for Safari Xcode project was not found."
+	print -u2 -- "Run this command from the extracted ZIP root or from safari-package inside the source repository."
 	exit 1
 fi
 
@@ -39,6 +47,7 @@ if [[ -z "$signing_identity" || -z "$team_id" || "$team_id" == "$identity_line" 
 	exit 1
 fi
 
+print -r -- "Using project from: $project_layout"
 print -r -- "Building 7TV for Safari with your local development identity..."
 DEVELOPER_DIR="$xcode_developer_dir" \
 	xcodebuild \

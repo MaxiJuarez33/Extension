@@ -13,7 +13,8 @@ Requirements:
 Choose exactly one installation guide:
 
 - [Manual installation](INSTALL-MANUAL.md) — use only Xcode and Finder.
-- [Command installation](INSTALL-COMMANDS.md) — run the included installer.
+- [Command installation](INSTALL-COMMANDS.md) — works from the downloaded ZIP
+  and from `safari-package` in the source repository.
 
 The manual guide includes screenshots for signing, running, and confirming the
 containing app before Safari is changed.
