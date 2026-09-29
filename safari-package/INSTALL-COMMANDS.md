@@ -2,9 +2,9 @@
 
 [← Back to the package overview](README.md) · [Use the visual guide instead →](INSTALL-MANUAL.md)
 
-![Difficulty: Fast](https://img.shields.io/badge/difficulty-fast-22c55e)
-![Cost: Free](https://img.shields.io/badge/cost-free-22c55e)
 ![Requires: Xcode](https://img.shields.io/badge/requires-Xcode-0a84ff?logo=xcode)
+![Platform: macOS 12+](https://img.shields.io/badge/macOS-12%2B-0a84ff?logo=apple)
+![Updated: 2026-09-29](https://img.shields.io/badge/updated-2026--09--29-64748b)
 
 This is the shortest repeatable setup. The included scripts build, install, and
 verify the Safari app without modifying the source package.

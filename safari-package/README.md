@@ -7,7 +7,7 @@
 ![Status: Unofficial](https://img.shields.io/badge/status-unofficial-f59e0b)
 ![Platform: macOS 12+](https://img.shields.io/badge/macOS-12%2B-0a84ff?logo=apple)
 ![Browser: Safari](https://img.shields.io/badge/browser-Safari-006cff?logo=safari)
-![Cost: Free](https://img.shields.io/badge/cost-free-22c55e)
+![Updated: 2026-09-29](https://img.shields.io/badge/updated-2026--09--29-64748b)
 
 </div>
 
@@ -17,6 +17,38 @@
 > [7TV Web Extension](https://github.com/SevenTV/Extension), with the native
 > wrapper and compatibility changes Safari requires. It is not a replacement
 > emote system and does not imitate or proxy 7TV.
+
+## 📣 Help bring Safari support upstream
+
+Native Safari support was proposed to the official repository in
+**[SevenTV/Extension#1265](https://github.com/SevenTV/Extension/pull/1265)**.
+At the time of this documentation update, the proposal is **closed and not
+merged**; it was closed by this fork's maintainer, not rejected by the 7TV
+team, and it received no official objections or review.
+
+If you want Safari to become an official 7TV target, visit the PR, read the
+proposal, and show interest constructively. Please do not spam or pressure the
+upstream maintainers.
+
+> [!NOTE]
+> Until Safari support is accepted upstream, I intend to keep this self-build
+> package updated in the fork, provided the official 7TV team has no objection.
+> It will remain clearly marked as unofficial.
+
+### Why the official team is still needed
+
+This fork can keep the source compatible with Safari and provide a reproducible
+self-build package. A normal one-click download, comparable to installing a
+regular browser extension, additionally needs:
+
+-   A 7TV-owned Apple Developer identity.
+-   Official signing and Apple notarization.
+-   Trusted release downloads maintained by 7TV.
+-   An official update and support policy.
+
+Only the 7TV team can make that distribution an **official 7TV release**. Until
+then, the local Xcode build is the transparent installation path available from
+this fork.
 
 ## ✨ What you get
 

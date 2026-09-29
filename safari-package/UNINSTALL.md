@@ -4,6 +4,7 @@
 
 ![Cleanup: Recoverable](https://img.shields.io/badge/cleanup-recoverable-22c55e)
 ![Xcode: Not required](https://img.shields.io/badge/Xcode-not_required-64748b)
+![Updated: 2026-09-29](https://img.shields.io/badge/updated-2026--09--29-64748b)
 
 The included uninstaller finds local **7TV for Safari** builds, unregisters
 their Safari extensions, and moves the files to a timestamped folder in the

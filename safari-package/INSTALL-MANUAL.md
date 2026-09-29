@@ -2,9 +2,9 @@
 
 [← Back to the package overview](README.md) · [Use commands instead →](INSTALL-COMMANDS.md)
 
-![Difficulty: Guided](https://img.shields.io/badge/difficulty-guided-8b5cf6)
-![Cost: Free](https://img.shields.io/badge/cost-free-22c55e)
 ![Requires: Xcode](https://img.shields.io/badge/requires-Xcode-0a84ff?logo=xcode)
+![Platform: macOS 12+](https://img.shields.io/badge/macOS-12%2B-0a84ff?logo=apple)
+![Updated: 2026-09-29](https://img.shields.io/badge/updated-2026--09--29-64748b)
 
 This route uses only Xcode and Finder. No Terminal commands are required.
 

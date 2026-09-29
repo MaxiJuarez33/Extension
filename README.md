@@ -57,11 +57,23 @@
 
 ![Safari: Unofficial self-build](https://img.shields.io/badge/Safari-unofficial_self--build-f59e0b?logo=safari)
 ![macOS: 12+](https://img.shields.io/badge/macOS-12%2B-0a84ff?logo=apple)
-![Cost: Free](https://img.shields.io/badge/cost-free-22c55e)
+![Updated: 2026-09-29](https://img.shields.io/badge/updated-2026--09--29-64748b)
 
 The Safari package is maintained on the fork's installation branch and is
 separate from the minimal upstream contribution. No official 7TV release,
 signature, or endorsement is implied.
+
+Safari support was proposed upstream in
+**[SevenTV/Extension#1265](https://github.com/SevenTV/Extension/pull/1265)**.
+The proposal is currently closed and not merged. Users who want official Safari
+support can review it and show interest constructively. Meanwhile, this fork's
+maintainer intends to keep the self-build package current, provided the 7TV
+team has no objection.
+
+> [!IMPORTANT]
+> A normal one-click Safari release still requires 7TV-owned Apple signing,
+> notarization, release hosting, and an official update policy. Only the 7TV
+> team can publish and maintain that as an official 7TV distribution.
 
 ## Development
 
