@@ -50,6 +50,7 @@ npx --no-install yarn@1.22.22 build:safari
 /usr/bin/ditto "$repo_dir/safari-package/README.md" "$package_dir/README.md"
 /usr/bin/ditto "$repo_dir/safari-package/INSTALL-MANUAL.md" "$package_dir/INSTALL-MANUAL.md"
 /usr/bin/ditto "$repo_dir/safari-package/INSTALL-COMMANDS.md" "$package_dir/INSTALL-COMMANDS.md"
+/usr/bin/ditto "$repo_dir/safari-package/UNINSTALL.md" "$package_dir/UNINSTALL.md"
 /usr/bin/ditto "$repo_dir/safari-package/AGENTS.md" "$package_dir/AGENTS.md"
 /usr/bin/ditto "$repo_dir/safari-package/CLAUDE.md" "$package_dir/CLAUDE.md"
 /usr/bin/ditto "$repo_dir/safari-package/install.command" "$package_dir/install.command"
