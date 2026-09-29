@@ -54,9 +54,10 @@ npx --no-install yarn@1.22.22 build:safari
 /usr/bin/ditto "$repo_dir/safari-package/CLAUDE.md" "$package_dir/CLAUDE.md"
 /usr/bin/ditto "$repo_dir/safari-package/install.command" "$package_dir/install.command"
 /usr/bin/ditto "$repo_dir/safari-package/verify.command" "$package_dir/verify.command"
+/usr/bin/ditto "$repo_dir/safari-package/uninstall-all.command" "$package_dir/uninstall-all.command"
 /usr/bin/ditto "$repo_dir/safari-package/screenshots" "$package_dir/screenshots"
 /usr/bin/ditto "$repo_dir/LICENSE.md" "$package_dir/LICENSE.md"
-/bin/chmod +x "$package_dir/install.command" "$package_dir/verify.command"
+/bin/chmod +x "$package_dir/install.command" "$package_dir/verify.command" "$package_dir/uninstall-all.command"
 
 /usr/bin/find "$package_dir" -name xcuserdata -type d -prune -exec /bin/rm -rf -- {} +
 

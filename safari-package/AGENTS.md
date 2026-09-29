@@ -60,3 +60,10 @@ Safari.app`. Do not modify unrelated browser, system, or upstream 7TV code.
   `.Extension` suffix.
 - Signature or manifest verification failure: stop. Do not install the app and
   report the exact failing check.
+
+## Complete uninstallation
+
+When the user explicitly requests removal of all Safari installations, run
+`./uninstall-all.command`. It unregisters verified 7TV extensions and moves all
+matching app and standalone extension bundles to a recoverable Trash folder.
+Do not broaden its search or permanently empty the Trash.

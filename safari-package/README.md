@@ -29,3 +29,12 @@ Keep the installed app in `~/Applications`. Removing it also removes the
 extension from Safari. A free Personal Team may require rebuilding periodically;
 run the same installation again if Safari stops accepting the development
 signature.
+
+To remove every local 7TV for Safari build and registration, quit Xcode and run:
+
+```sh
+./uninstall-all.command
+```
+
+The uninstaller validates each 7TV bundle and moves it to a timestamped folder
+inside the Trash instead of deleting it permanently.
