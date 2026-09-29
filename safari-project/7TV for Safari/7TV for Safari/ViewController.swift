@@ -109,7 +109,7 @@ class ViewController: NSViewController {
                         DispatchQueue.main.async {
                             let appleEventError = error == nil ? nil : self.openSafariExtensionsUsingAppleEvent()
                             if error == nil || appleEventError == nil {
-                                self.statusLabel.stringValue = "Safari Settings opened. Enable 7TV for Safari (Unofficial)."
+                                NSApplication.shared.terminate(nil)
                             } else {
                                 self.statusLabel.stringValue = "Safari opened. Select Safari > Settings > Extensions manually."
                             }

@@ -40,6 +40,11 @@ Twitch and Kick. If macOS asks whether the app may control Safari, choose
 **Allow**; this permission is used only to open that panel. Confirm emotes on
 both sites, reload both pages, then quit and reopen Safari once.
 
+First use: if Safari shows the extension as enabled (the extension icon is
+blue) but the 7TV icon or emotes do not appear on an already-open Twitch or Kick
+page, reload that page once. Safari only injects a newly enabled extension into
+the page after a reload.
+
 If the installer says that no Apple Development identity exists, return to
 Xcode > Settings > Accounts > Manage Certificates, create one, and rerun the
 same two commands.

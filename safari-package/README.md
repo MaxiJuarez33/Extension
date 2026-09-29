@@ -19,9 +19,13 @@ Choose exactly one installation guide:
 The manual guide includes screenshots for signing, running, and confirming the
 containing app before Safari is changed.
 
+After enabling the extension for the first time, reload any Twitch or Kick page
+that was already open. If the extension icon is blue but the 7TV icon or emotes
+are missing, that first reload allows Safari to inject the extension.
+
 For AI-assisted installation, give the extracted folder to the assistant and
-say: **“Read `AGENTS.md`, install this package, and run every required
-verification.”** `CLAUDE.md` redirects Claude to the same instructions.
+say: **“Read `INSTALL-COMMANDS.md`, install this package, and run every required
+verification.”**
 
 The package already contains the compiled 7TV web extension. Node.js, Yarn,
 Homebrew, Git, and the Xcode Command Line Tools package are not required.
