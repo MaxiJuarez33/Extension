@@ -33,6 +33,8 @@ blue) but the 7TV icon or emotes do not appear on an already-open Twitch or Kick
 page, reload that page once. Safari only injects a newly enabled extension into
 the page after a reload.
 
+![Reload Twitch when 7TV is enabled but has not appeared yet](screenshots/05-reload-twitch.png)
+
 Verification: open Twitch and Kick, confirm that 7TV emotes appear, reload each
 page, then quit and reopen Safari. If Xcode reports that a bundle identifier is
 unavailable, change both identifiers under Signing & Capabilities to a unique

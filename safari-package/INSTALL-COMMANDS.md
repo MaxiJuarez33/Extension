@@ -45,6 +45,8 @@ blue) but the 7TV icon or emotes do not appear on an already-open Twitch or Kick
 page, reload that page once. Safari only injects a newly enabled extension into
 the page after a reload.
 
+![Reload Twitch when 7TV is enabled but has not appeared yet](screenshots/05-reload-twitch.png)
+
 If the installer says that no Apple Development identity exists, return to
 Xcode > Settings > Accounts > Manage Certificates, create one, and rerun the
 same two commands.

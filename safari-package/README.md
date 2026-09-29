@@ -23,6 +23,8 @@ After enabling the extension for the first time, reload any Twitch or Kick page
 that was already open. If the extension icon is blue but the 7TV icon or emotes
 are missing, that first reload allows Safari to inject the extension.
 
+![Reload Twitch when 7TV is enabled but has not appeared yet](screenshots/05-reload-twitch.png)
+
 For AI-assisted installation, give the extracted folder to the assistant and
 say: **“Read `INSTALL-COMMANDS.md`, install this package, and run every required
 verification.”**
