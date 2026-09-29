@@ -44,6 +44,9 @@ npx --no-install yarn@1.22.22 build:safari
 /usr/bin/sed -i '' \
 	's/INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari Extension";/INFOPLIST_KEY_CFBundleDisplayName = "7TV for Safari (Unofficial)";/' \
 	"$package_dir/7TV for Safari/7TV for Safari.xcodeproj/project.pbxproj"
+/usr/bin/sed -i '' -E \
+	'/^[[:space:]]*DEVELOPMENT_TEAM = [A-Z0-9]+;$/d' \
+	"$package_dir/7TV for Safari/7TV for Safari.xcodeproj/project.pbxproj"
 /usr/bin/ditto "$repo_dir/safari-package/README.md" "$package_dir/README.md"
 /usr/bin/ditto "$repo_dir/safari-package/INSTALL-MANUAL.md" "$package_dir/INSTALL-MANUAL.md"
 /usr/bin/ditto "$repo_dir/safari-package/INSTALL-COMMANDS.md" "$package_dir/INSTALL-COMMANDS.md"
@@ -51,6 +54,7 @@ npx --no-install yarn@1.22.22 build:safari
 /usr/bin/ditto "$repo_dir/safari-package/CLAUDE.md" "$package_dir/CLAUDE.md"
 /usr/bin/ditto "$repo_dir/safari-package/install.command" "$package_dir/install.command"
 /usr/bin/ditto "$repo_dir/safari-package/verify.command" "$package_dir/verify.command"
+/usr/bin/ditto "$repo_dir/safari-package/screenshots" "$package_dir/screenshots"
 /usr/bin/ditto "$repo_dir/LICENSE.md" "$package_dir/LICENSE.md"
 /bin/chmod +x "$package_dir/install.command" "$package_dir/verify.command"
 

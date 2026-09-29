@@ -10,8 +10,19 @@
 5. Select the blue **7TV for Safari** project. Under **Signing & Capabilities**,
    select your **Personal Team** for both targets: **7TV for Safari** and
    **7TV for Safari Extension**.
+
+   ![Select a Personal Team for both targets](screenshots/02-signing.png)
+
 6. At the top of Xcode select the **7TV for Safari** scheme and **My Mac**, then
-   press the Run button. Wait until the app opens.
+   press the Run button.
+
+   ![Select the app scheme, My Mac, and Run](screenshots/03-run.png)
+
+   Wait for the app below. It must show the 7TV icon, an extension status, and
+   **Open Safari Settings…**. A blank window means the build is not correct.
+
+   ![Expected 7TV for Safari app](screenshots/04-ready.png)
+
 7. Open **Safari > Settings > Extensions**, enable **7TV for Safari
    (Unofficial)**, and allow access to Twitch and Kick.
 
@@ -20,3 +31,6 @@ page, then quit and reopen Safari. If Xcode reports that a bundle identifier is
 unavailable, change both identifiers under Signing & Capabilities to a unique
 prefix such as `local.yourname.seventv.safari` and
 `local.yourname.seventv.safari.Extension`.
+
+The team name in the screenshots is intentionally generic. Your own Personal
+Team name will be different.
