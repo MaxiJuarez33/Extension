@@ -20,20 +20,17 @@
 
 ## 📣 Help bring Safari support upstream
 
-Native Safari support was proposed to the official repository in
-**[SevenTV/Extension#1265](https://github.com/SevenTV/Extension/pull/1265)**.
-At the time of this documentation update, the proposal is **closed and not
-merged**; it was closed by this fork's maintainer, not rejected by the 7TV
-team, and it received no official objections or review.
-
-If you want Safari to become an official 7TV target, visit the PR, read the
-proposal, and show interest constructively. Please do not spam or pressure the
-upstream maintainers.
+An initial proposal was published as
+**[SevenTV/Extension#1265](https://github.com/SevenTV/Extension/pull/1265)** and
+then closed by this fork's maintainer before official review. A revised upstream
+PR is planned. When it is ready, this section will link to the active proposal
+so interested users can review it and show support constructively.
 
 > [!NOTE]
 > Until Safari support is accepted upstream, I intend to keep this self-build
 > package updated in the fork, provided the official 7TV team has no objection.
-> It will remain clearly marked as unofficial.
+> It will remain clearly marked as unofficial. Please do not spam or pressure
+> upstream maintainers while the revised proposal is being prepared.
 
 ### Why the official team is still needed
 

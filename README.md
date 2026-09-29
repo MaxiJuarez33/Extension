@@ -63,12 +63,11 @@ The Safari package is maintained on the fork's installation branch and is
 separate from the minimal upstream contribution. No official 7TV release,
 signature, or endorsement is implied.
 
-Safari support was proposed upstream in
-**[SevenTV/Extension#1265](https://github.com/SevenTV/Extension/pull/1265)**.
-The proposal is currently closed and not merged. Users who want official Safari
-support can review it and show interest constructively. Meanwhile, this fork's
-maintainer intends to keep the self-build package current, provided the 7TV
-team has no objection.
+An initial Safari proposal was published as
+**[SevenTV/Extension#1265](https://github.com/SevenTV/Extension/pull/1265)** and
+closed by this fork's maintainer before official review. A revised upstream PR
+is planned. Meanwhile, this fork's maintainer intends to keep the self-build
+package current, provided the 7TV team has no objection.
 
 > [!IMPORTANT]
 > A normal one-click Safari release still requires 7TV-owned Apple signing,
