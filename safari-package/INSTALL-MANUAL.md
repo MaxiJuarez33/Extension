@@ -1,45 +1,138 @@
-# Manual installation
+# 🖱️ Manual installation
 
-1. Install the free [Xcode app](https://apps.apple.com/app/xcode/id497799835).
-   Command Line Tools alone are not sufficient.
-2. Open Xcode once, accept its license, then open **Xcode > Settings >
-   Accounts** and add your Apple Account.
-3. Select your account, click **Manage Certificates**, press **+**, and create
+[← Back to the package overview](README.md) · [Use commands instead →](INSTALL-COMMANDS.md)
+
+![Difficulty: Guided](https://img.shields.io/badge/difficulty-guided-8b5cf6)
+![Cost: Free](https://img.shields.io/badge/cost-free-22c55e)
+![Requires: Xcode](https://img.shields.io/badge/requires-Xcode-0a84ff?logo=xcode)
+
+This route uses only Xcode and Finder. No Terminal commands are required.
+
+> [!IMPORTANT]
+> This is an **unofficial Safari build of the real 7TV Web Extension**. You are
+> not installing a separate emote service. Xcode packages the included 7TV
+> resources into the native container Safari requires and signs it with your
+> own free Apple Development identity.
+
+## ✅ Before you begin
+
+-   macOS 12 or later.
+-   The full [Xcode app](https://apps.apple.com/app/xcode/id497799835).
+-   A free Apple Account.
+
+> [!WARNING]
+> Xcode Command Line Tools alone are not sufficient. You need the full Xcode
+> app from the Mac App Store.
+
+## 1. Prepare Xcode
+
+1. Install and open Xcode once.
+2. Accept Apple's license and allow Xcode to finish its first-launch setup.
+3. Open **Xcode > Settings > Accounts** and add your Apple Account.
+4. Select the account, choose **Manage Certificates**, press **+**, and create
    an **Apple Development** certificate if none exists.
-4. Open `7TV for Safari/7TV for Safari.xcodeproj` from this package.
-5. Select the blue **7TV for Safari** project. Under **Signing & Capabilities**,
-   select your **Personal Team** for both targets: **7TV for Safari** and
-   **7TV for Safari Extension**.
 
-   ![Select a Personal Team for both targets](screenshots/02-signing.png)
+> [!NOTE]
+> The certificate stays in your macOS Keychain. This package never uploads or
+> exports it.
 
-6. At the top of Xcode select the **7TV for Safari** scheme and **My Mac**, then
-   press the Run button.
+## 2. Open the Safari project
 
-   ![Select the app scheme, My Mac, and Run](screenshots/03-run.png)
+Open this file from the extracted package:
 
-   Wait for the app below. It must show the 7TV icon, an extension status, and
-   **Open Safari Settings…**. A blank window means the build is not correct.
+```text
+7TV for Safari/7TV for Safari.xcodeproj
+```
 
-   ![Expected 7TV for Safari app](screenshots/04-ready.png)
+In Xcode, select the blue **7TV for Safari** project. Under **Signing &
+Capabilities**, choose your **Personal Team** for both targets:
 
-7. Press **Open Safari Settings…**. Safari must open directly at
-   **Settings > Extensions**. Enable **7TV for Safari (Unofficial)** and allow
-   access to Twitch and Kick. If macOS asks whether the app may control Safari,
-   choose **Allow**; this permission is used only to open that Safari panel.
+-   **7TV for Safari**
+-   **7TV for Safari Extension**
 
-First use: if Safari shows the extension as enabled (the extension icon is
-blue) but the 7TV icon or emotes do not appear on an already-open Twitch or Kick
-page, reload that page once. Safari only injects a newly enabled extension into
-the page after a reload.
+![Select a Personal Team for both targets](screenshots/02-signing.png)
+
+> [!TIP]
+> Your Personal Team name will be different from the generic name shown in the
+> screenshot. That is expected.
+
+## 3. Build and run
+
+At the top of Xcode:
+
+1. Select the **7TV for Safari** scheme.
+2. Select **My Mac** as the destination.
+3. Press the ▶ **Run** button.
+
+![Select the app scheme, My Mac, and Run](screenshots/03-run.png)
+
+Wait for the containing app to appear. It must show the 7TV icon, an extension
+status, and the **Open Safari Settings…** button.
+
+![Expected 7TV for Safari app](screenshots/04-ready.png)
+
+> [!CAUTION]
+> If the app opens as a blank window, stop here. That is not the expected build;
+> review the troubleshooting section below before enabling anything in Safari.
+
+## 4. Enable the extension
+
+1. Press **Open Safari Settings…**. The containing app closes automatically.
+2. Safari opens directly at **Settings > Extensions**.
+3. Enable **7TV for Safari (Unofficial)**.
+4. Allow access to **Twitch** and **Kick**.
+5. If macOS asks whether the app may control Safari, choose **Allow**. This
+   permission is restricted to opening Safari's Extensions Settings panel.
+
+## 5. Reload Twitch or Kick once
+
+> [!TIP]
+> If Safari shows the extension as enabled and its icon is blue, but the 7TV
+> button or emotes are missing on a tab that was already open, **reload the page
+> once**. Safari injects a newly enabled extension when the page loads.
 
 ![Reload Twitch when 7TV is enabled but has not appeared yet](screenshots/05-reload-twitch.png)
 
-Verification: open Twitch and Kick, confirm that 7TV emotes appear, reload each
-page, then quit and reopen Safari. If Xcode reports that a bundle identifier is
-unavailable, change both identifiers under Signing & Capabilities to a unique
-prefix such as `local.yourname.seventv.safari` and
-`local.yourname.seventv.safari.Extension`.
+## 6. Verify the result
 
-The team name in the screenshots is intentionally generic. Your own Personal
-Team name will be different.
+-   [ ] Open a Twitch stream and confirm that 7TV emotes render.
+-   [ ] Reload Twitch and confirm that 7TV returns.
+-   [ ] Open Kick and repeat the same check.
+-   [ ] Quit Safari completely, reopen it, and confirm the extension still loads.
+
+## 🛠️ Troubleshooting
+
+<details>
+<summary><strong>Xcode says the bundle identifier is unavailable</strong></summary>
+
+Change both identifiers under **Signing & Capabilities** to a unique prefix:
+
+```text
+local.yourname.seventv.safari
+local.yourname.seventv.safari.Extension
+```
+
+Keep `.Extension` on the extension target and use the same prefix for both.
+
+</details>
+
+<details>
+<summary><strong>No Apple Development certificate appears</strong></summary>
+
+Return to **Xcode > Settings > Accounts > Manage Certificates**, press **+**,
+and create an **Apple Development** certificate. Then select the Personal Team
+again for both targets.
+
+</details>
+
+<details>
+<summary><strong>The extension is enabled, but nothing appears on Twitch</strong></summary>
+
+Reload the Twitch tab once. If it still does not appear, confirm that Safari
+granted website access to `twitch.tv`, then quit and reopen Safari.
+
+</details>
+
+## 🧹 Remove it later
+
+Use the recoverable procedure in [UNINSTALL.md](UNINSTALL.md).

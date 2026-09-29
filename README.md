@@ -46,6 +46,23 @@
   </a>
 </p>
 
+## 🍎 Safari support
+
+> [!TIP]
+> **Want to use 7TV on Safari today?** This fork includes a free, unofficial
+> self-build package for macOS. It uses the real 7TV Web Extension code and
+> guides you through signing the Safari container with your own Apple Account.
+>
+> **[Open the 7TV for Safari installation guide →](safari-package/README.md)**
+
+![Safari: Unofficial self-build](https://img.shields.io/badge/Safari-unofficial_self--build-f59e0b?logo=safari)
+![macOS: 12+](https://img.shields.io/badge/macOS-12%2B-0a84ff?logo=apple)
+![Cost: Free](https://img.shields.io/badge/cost-free-22c55e)
+
+The Safari package is maintained on the fork's installation branch and is
+separate from the minimal upstream contribution. No official 7TV release,
+signature, or endorsement is implied.
+
 ## Development
 
 ### Safari
@@ -53,12 +70,18 @@
 The native Safari Web Extension wrapper uses the same Twitch, Kick and YouTube
 implementations as the other browser builds.
 
-End users should install a signed and notarized `7TV for Safari.app` release,
-open it once, then enable 7TV in Safari Settings > Extensions. They do not need
-Xcode, a terminal, or any development tools.
+The ideal public distribution is a signed and notarized `7TV for Safari.app`
+produced by 7TV. This repository currently contains the source build target and
+does not ship that official binary.
 
-This repository currently contains the source build target; it does not ship a
-notarized public binary. Maintainers building or preparing a release can use:
+Until an official release exists, this fork provides an **unofficial,
+self-built Xcode package**. It requires full
+[Xcode](https://apps.apple.com/app/xcode/id497799835) and a free Apple Account,
+but no Node.js, Yarn, Homebrew, or Git. See the
+[complete Safari installation guide](safari-package/README.md) for manual,
+command, and AI-assisted setup.
+
+Maintainers building or preparing an official release can use:
 
 ```sh
 yarn build:safari
@@ -68,12 +91,7 @@ yarn build:safari
 See [SAFARI.md](SAFARI.md) for user installation, maintainer builds, and public
 distribution requirements.
 
-This fork also prepares an **unofficial, self-built Xcode package** for users
-who want Safari support before an official notarized release. It requires full
-[Xcode](https://apps.apple.com/app/xcode/id497799835) and a free Apple Account,
-but no Node.js, Yarn, Homebrew, or Git. See
-[safari-package/README.md](safari-package/README.md) for the manual, command,
-and AI-assisted installation paths. Generate the distributable ZIP with:
+Generate the unofficial distributable ZIP with:
 
 ```sh
 ./script/package-safari-xcode.sh

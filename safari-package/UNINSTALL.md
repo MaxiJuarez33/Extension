@@ -1,22 +1,34 @@
-# Uninstall 7TV for Safari
+# 🧹 Uninstall 7TV for Safari
 
-The uninstaller removes every detected local build of **7TV for Safari** and
-its Safari extension registrations. It closes Safari and moves matching files
-to a timestamped folder in the Trash; it does not permanently delete them.
+[← Back to the package overview](README.md)
 
-Xcode and developer tools are not required for uninstallation.
+![Cleanup: Recoverable](https://img.shields.io/badge/cleanup-recoverable-22c55e)
+![Xcode: Not required](https://img.shields.io/badge/Xcode-not_required-64748b)
 
-## From the downloaded ZIP
+The included uninstaller finds local **7TV for Safari** builds, unregisters
+their Safari extensions, and moves the files to a timestamped folder in the
+Trash.
 
-Extract `7TV-for-Safari-Xcode.zip`. Open Terminal, type `cd ` with a trailing
-space, drag the extracted `7TV-for-Safari-Xcode` folder into Terminal, and press
-Return. Then run:
+> [!IMPORTANT]
+> The cleanup is recoverable. Matching files are **moved to the Trash**, not
+> permanently erased. The source repository and downloaded ZIP are left alone.
+
+> [!WARNING]
+> Safari closes during cleanup so it cannot keep an extension copy loaded.
+
+## 📦 From the downloaded ZIP
+
+1. Extract `7TV-for-Safari-Xcode.zip` if necessary.
+2. Open Terminal.
+3. Type `cd ` with a trailing space and drag the extracted
+   `7TV-for-Safari-Xcode` folder into Terminal.
+4. Press Return, then run:
 
 ```sh
 ./uninstall-all.command
 ```
 
-## From the source repository
+## 🌿 From the source repository
 
 Open Terminal in the repository root and run:
 
@@ -24,17 +36,45 @@ Open Terminal in the repository root and run:
 ./safari-package/uninstall-all.command
 ```
 
-## Expected result
+Xcode and developer tools are not required for uninstallation.
 
-A successful cleanup ends with:
+## 🔍 What gets removed
+
+| Item                               | Action                                |
+| ---------------------------------- | ------------------------------------- |
+| Installed app copies               | Moved to the recoverable Trash folder |
+| Safari Web Extension registrations | Unregistered with macOS               |
+| Matching Xcode build products      | Moved to the recoverable Trash folder |
+| Matching temporary build copies    | Moved to the recoverable Trash folder |
+| Repository and downloaded ZIP      | **Kept**                              |
+| Unrelated Safari extensions        | **Kept**                              |
+
+The script verifies each candidate using its 7TV manifest before moving it.
+Similarly named apps that cannot be verified are skipped.
+
+## ✅ Expected result
+
+A complete cleanup ends with:
 
 ```text
 PASS: no 7TV for Safari app or Safari extension registration remains.
 ```
 
-Removed files are recoverable from a folder named
-`7TV-for-Safari-uninstalled-YYYYMMDD-HHMMSS` in the Trash. The source
-repository and downloaded ZIP are not removed.
+Recoverable files are stored in:
 
-Reopen Safari after the command finishes. If Safari still displays cached 7TV
-entries in **Safari > Settings > Extensions**, restart macOS once.
+```text
+~/.Trash/7TV-for-Safari-uninstalled-YYYYMMDD-HHMMSS
+```
+
+## ♻️ Restore or finish cleanup
+
+-   To restore something, open the timestamped folder in the Trash and move the
+    desired app back manually.
+-   To remove it permanently, empty the Trash yourself after reviewing the
+    contents.
+-   Reopen Safari after the command finishes.
+
+> [!NOTE]
+> Safari can briefly display a cached entry after its files and registration
+> are gone. If an old 7TV row remains under **Safari > Settings > Extensions**,
+> restart macOS once to clear that cached UI state.
