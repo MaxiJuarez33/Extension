@@ -47,6 +47,19 @@ Only the 7TV team can make that distribution an **official 7TV release**. Until
 then, the local Xcode build is the transparent installation path available from
 this fork.
 
+## 📦 Download
+
+Download the current package from the fork's first public release:
+
+-   **[7TV-for-Safari-Xcode.zip](https://github.com/MaxiJuarez33/Extension/releases/download/safari-unofficial-v1.0.0/7TV-for-Safari-Xcode.zip)** — Xcode project and complete installation guides.
+-   **[SHA-256 checksum](https://github.com/MaxiJuarez33/Extension/releases/download/safari-unofficial-v1.0.0/7TV-for-Safari-Xcode.zip.sha256)** — verifies that the downloaded ZIP is unchanged.
+-   **[Release notes](https://github.com/MaxiJuarez33/Extension/releases/tag/safari-unofficial-v1.0.0)** — version details and included files.
+
+> [!NOTE]
+> This download removes the need to install Node.js, Yarn, Homebrew, or Git. It
+> still requires full Xcode and local signing with your own free Apple Account,
+> as explained below.
+
 ## ✨ What you get
 
 -   The familiar 7TV experience on **Twitch** and **Kick** in Safari.

@@ -54,6 +54,8 @@
 > guides you through signing the Safari container with your own Apple Account.
 >
 > **[Open the 7TV for Safari installation guide →](safari-package/README.md)**
+>
+> **[Download 7TV for Safari (Unofficial) v1.0.0 →](https://github.com/MaxiJuarez33/Extension/releases/download/safari-unofficial-v1.0.0/7TV-for-Safari-Xcode.zip)**
 
 ![Safari: Unofficial self-build](https://img.shields.io/badge/Safari-unofficial_self--build-f59e0b?logo=safari)
 ![macOS: 12+](https://img.shields.io/badge/macOS-12%2B-0a84ff?logo=apple)
@@ -91,6 +93,9 @@ self-built Xcode package**. It requires full
 but no Node.js, Yarn, Homebrew, or Git. See the
 [complete Safari installation guide](safari-package/README.md) for manual,
 command, and AI-assisted setup.
+
+The latest package, checksum, and release notes are available from
+**[7TV for Safari (Unofficial) v1.0.0](https://github.com/MaxiJuarez33/Extension/releases/tag/safari-unofficial-v1.0.0)**.
 
 Maintainers building or preparing an official release can use:
 
