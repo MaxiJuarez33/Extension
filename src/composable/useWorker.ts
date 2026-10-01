@@ -4,6 +4,9 @@ import { Logger, log } from "@/common/Logger";
 import { TypedWorkerMessage, WorkerMessage, WorkerMessageType } from "@/worker";
 
 let workerURL: string | null;
+const isSafari = import.meta.env.VITE_APP_SAFARI === "true";
+const SAFARI_WORKER_READY_TIMEOUT = 5000;
+const SAFARI_WORKER_START_ATTEMPTS = 2;
 
 const workerLog = new Logger();
 workerLog.setContextName("Worker/Pipe");
@@ -13,8 +16,6 @@ let worker: SharedWorker | null = null;
 type WorkerAddrMap = Record<string, string>;
 
 async function init(originURL: string): Promise<SharedWorker> {
-	let sw: SharedWorker;
-
 	// Check for existing url
 	// If it exists, we'll connect to it
 	const appVersion = import.meta.env.VITE_APP_VERSION;
@@ -28,7 +29,10 @@ async function init(originURL: string): Promise<SharedWorker> {
 		localStorage.removeItem(LOCAL_STORAGE_KEYS.WORKER_ADDR);
 	}
 
-	workerURL = typeof workerAddr === "object" && workerAddr !== null ? workerAddr[appVersion] : null;
+	// A blob URL can outlive its SharedWorker registration in Safari's page
+	// storage. Reusing that URL may reconnect to a worker that WebKit no longer
+	// launches, leaving the app waiting for INIT until Safari is restarted.
+	workerURL = !isSafari && typeof workerAddr === "object" && workerAddr !== null ? workerAddr[appVersion] : null;
 
 	const ok =
 		workerURL &&
@@ -56,35 +60,68 @@ async function init(originURL: string): Promise<SharedWorker> {
 
 		// Create BLOB URL for worker & set it into local storage
 		workerURL = URL.createObjectURL(data);
-		localStorage.setItem(
-			LOCAL_STORAGE_KEYS.WORKER_ADDR,
-			JSON.stringify({ ...(workerAddr ?? {}), [appVersion]: workerURL }),
-		);
+		if (!isSafari) {
+			localStorage.setItem(
+				LOCAL_STORAGE_KEYS.WORKER_ADDR,
+				JSON.stringify({ ...(workerAddr ?? {}), [appVersion]: workerURL }),
+			);
+		}
 	} else {
 		log.info("Connecting to existing worker", `addr=${workerURL}`);
 	}
 
-	// Connect to worker
-	return new Promise<SharedWorker>((resolve, reject) => {
-		if (!workerURL) return reject("No address to worker");
+	if (!workerURL) return Promise.reject("No address to worker");
 
-		// Spawn or connect to worker
-		sw = worker = new SharedWorker(workerURL, {
-			name: "seventv-extension",
-		});
-		sw.port.start();
+	const sw = startWorker(workerURL, 1);
 
-		// Define message handlers
-		useGlobalHandlers(sw.port);
-		useHandlers(sw.port);
-
-		// Emit close on page exit
-		addEventListener("beforeunload", () => {
-			sendMessage("CLOSE", {});
-		});
-
-		resolve(sw);
+	// Emit close on page exit
+	addEventListener("beforeunload", () => {
+		sendMessage("CLOSE", {});
 	});
+
+	return sw;
+}
+
+function startWorker(url: string, attempt: number): SharedWorker {
+	// A unique Safari name prevents WebKit from matching a new page to a stale
+	// SharedWorker registration. Other browsers retain the existing shared
+	// worker behavior across tabs.
+	const name = isSafari ? `seventv-extension-safari-${Date.now()}-${attempt}` : "seventv-extension";
+	const sw = new SharedWorker(url, { name });
+	worker = sw;
+
+	// Install listeners before starting the port so a fast INIT message cannot
+	// be dispatched between port.start() and listener registration.
+	useGlobalHandlers(sw.port);
+	useHandlers(sw.port);
+
+	if (isSafari) {
+		let ready = false;
+		const onMessage = (ev: MessageEvent) => {
+			if (ev.data?.type !== "INIT") return;
+
+			ready = true;
+			sw.port.removeEventListener("message", onMessage);
+		};
+		sw.port.addEventListener("message", onMessage);
+
+		setTimeout(() => {
+			if (ready || worker !== sw) return;
+
+			sw.port.removeEventListener("message", onMessage);
+			sw.port.close();
+
+			if (attempt < SAFARI_WORKER_START_ATTEMPTS) {
+				log.warn("Safari worker did not become ready; retrying with a fresh registration");
+				startWorker(url, attempt + 1);
+			} else {
+				log.error("Safari worker did not become ready after retrying");
+			}
+		}, SAFARI_WORKER_READY_TIMEOUT);
+	}
+
+	sw.port.start();
+	return sw;
 }
 
 function sendMessage<T extends WorkerMessageType>(type: T, data: TypedWorkerMessage<T>): void {
